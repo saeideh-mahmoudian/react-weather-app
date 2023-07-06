@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import WeatherInfo from "./WeatherInfo";
 import axios from "axios";
+import { Audio } from  'react-loader-spinner'
 import "./Weather.css";
 
 export default function Weather(props) {
@@ -21,7 +22,7 @@ export default function Weather(props) {
   }
 
   function search() {
-    const apiKey = "e450bc345a80a08ada69fd5c714d871d";
+    const apiKey = "cf341738c7bb0fba2e56905d21ee16f0";
     let apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=metric`;
     axios.get(apiUrl).then(handleResponse);
   }
@@ -38,7 +39,7 @@ export default function Weather(props) {
   if (weatherData.ready) {
     return (
       <div className="Weather">
-        <form onSubmit={handleSubmit}>
+        <form className="m-3" onSubmit={handleSubmit}>
           <div className="row">
             <div className="col-9">
               <input
@@ -63,6 +64,14 @@ export default function Weather(props) {
     );
   } else {
     search();
-    return "Loading...";
+    return <Audio
+    height = "80"
+    width = "80"
+    radius = "9"
+    color = 'green'
+    ariaLabel = 'three-dots-loading'     
+    wrapperStyle
+    wrapperClass
+  />
   }
 }
